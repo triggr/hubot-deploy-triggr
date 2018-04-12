@@ -1,0 +1,22 @@
+{
+  "name": "hubot-deploy",
+  "version": "0.1.1",
+  "author": "Triggr Health",
+  "description": "Run ansible deploy from slack",
+  "keywords": [
+    "hubot",
+    "hubot-scripts"
+  ],
+  "license": "MIT",
+  "main": "index.coffee",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/triggr/hubot-deploy.git"
+  },
+  "dependencies": {
+    "coffee-script": "~1.7"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.7.1"
+  }
+}
