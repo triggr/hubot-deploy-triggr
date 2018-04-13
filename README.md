@@ -1,4 +1,4 @@
-# hubot-deploy
+# hubot-deploy-triggr
 
 Allows hubot to run deploy commands via slack commands
 
