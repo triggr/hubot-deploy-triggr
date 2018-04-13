@@ -9,10 +9,21 @@
 
 exec = require('child_process').exec
 deployScriptPath = '/home/hubot/DeploymentScripts/hubot'
-authorizedSlackUsers = ['josh.greenberger', 'CircleCI']
+authorizedSlackUsers = [
+  'bong.koh',
+  'CircleCI', 
+  'brain.lai', 
+  'dan.perron',
+  'luke.wilimitis',
+  'jacob.lee',
+  'josh.gachnang',
+  'josh.greenberger', 
+  'sunjay.kumar',
+]
 
 module.exports = (robot) ->
 
+  # Matcher at the end of the regex looks for the deploy tag.
   robot.respond /deploy dev ([\w-\.]+)$/i, (msg) ->
     return unless msg.message.user.name in authorizedSlackUsers
     deployTag = msg.match[1].toLowerCase()
