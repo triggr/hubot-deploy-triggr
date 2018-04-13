@@ -1,5 +1,5 @@
 {
-  "name": "hubot-deploy",
+  "name": "hubot-deploy-triggr",
   "version": "0.1.1",
   "author": "Triggr Health",
   "description": "Run ansible deploy from slack",
@@ -11,7 +11,7 @@
   "main": "index.coffee",
   "repository": {
     "type": "git",
-    "url": "git://github.com/triggr/hubot-deploy.git"
+    "url": "git://github.com/triggr/hubot-deploy-triggr.git"
   },
   "dependencies": {
     "coffee-script": "~1.7"
