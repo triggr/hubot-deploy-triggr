@@ -23,7 +23,7 @@ module.exports = function(robot) {
     let deployTag = msg.match[1].toLowerCase();
     msg.reply('Starting api dev continuous deploy.');
     try {
-      let {stdout, stderr} = await exec(`${deployScriptPath}/dev.deploy_api.sh ${deployTag}`);
+      let {stdout, stderr} = await exec(`sudo ${deployScriptPath}/dev.deploy_api.sh ${deployTag}`);
       if (stdout) {
         robot.logger.info(`stdout: ${stdout}`);
       }
