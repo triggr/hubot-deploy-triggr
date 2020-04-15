@@ -13,10 +13,15 @@
     "type": "git",
     "url": "git://github.com/triggr/hubot-deploy-triggr.git"
   },
-  "dependencies": {
-    "coffee-script": "~1.7"
-  },
   "devDependencies": {
-    "coffee-script": "~1.7.1"
+    "eslint": "4.1.1",
+    "prettier": "1.9.1"
+  },
+  "scripts": {
+    "lint": "prettier --list-different \"**/*.js\" && eslint --max-warnings 0 .",
+    "prettier": "prettier --write \"**/*.js\""
+  },
+  "bugs": {
+    "url": "https://github.com/triggr/hubot-deploy-triggr/issues"
   }
 }
