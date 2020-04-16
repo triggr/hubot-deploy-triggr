@@ -15,10 +15,13 @@ const authorizedSlackUsers = ['bkoh', 'jgachnang', 'blai', 'devops'];
 
 module.exports = function(robot) {
   robot.respond(/deploy dev ([\w-\.]+)$/i, async (msg) => {
-    robot.logger.info(`attempting to deploy dev by user's command, user=${msg.message.user}`);
-    if (!authorizedSlackUsers.includes(msg.message.user.name)) {
+    robot.logger.info(
+      `attempting to deploy dev by user's command, user=${JSON.stringify(msg.message.user)}`
+    );
+    if (msg.message.user.name && !authorizedSlackUsers.includes(msg.message.user.name)) {
       robot.logger.error(`Unauthorized user ${msg.message.user.name}`);
       msg.reply(`You don't have the authoritah!!!`);
+      return;
     }
     let deployTag = msg.match[1].toLowerCase();
     msg.reply('Starting api dev continuous deploy.');
