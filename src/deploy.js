@@ -14,19 +14,21 @@ const deployScriptPath = '/home/hubot/DeploymentScripts/hubot';
 const authorizedSlackUsers = ['bkoh', 'jgachnang', 'blai', 'devops'];
 
 module.exports = function(robot) {
-  robot.respond(/deploy dev ([\w-\.]+)$/i, async (msg) => {
+  robot.respond(/deploy (\w+) ([\w-\.]+) (.+)$/i, async (msg) => {
+    let environment = msg.match[1].toLowerCase();
+    let deployTag = msg.match[2].toLowerCase();
+    let artifactUrl = msg.match[3].toLowerCase();
     robot.logger.info(
-      `attempting to deploy dev by user's command, user=${JSON.stringify(msg.message.user)}`
+      `attempting to deploy ${environment} by user's command, user=${JSON.stringify(msg.message.user)}`
     );
     if (msg.message.user.name && !authorizedSlackUsers.includes(msg.message.user.name)) {
       robot.logger.error(`Unauthorized user ${msg.message.user.name}`);
       msg.reply(`You don't have the authoritah!!!`);
       return;
     }
-    let deployTag = msg.match[1].toLowerCase();
-    msg.reply('Starting api dev continuous deploy.');
+    msg.reply(`Starting ${environment}:${deployTag} continuous deploy.`);
     try {
-      let {stdout, stderr} = await exec(`sudo ${deployScriptPath}/dev.deploy_api.sh ${deployTag}`);
+      let {stdout, stderr} = await exec(`sudo ${deployScriptPath}/deploy_api.sh ${environment} ${deployTag} ${artifactUrl}`);
       if (stdout) {
         robot.logger.info(`stdout: ${stdout}`);
       }
