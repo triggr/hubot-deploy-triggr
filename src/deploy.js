@@ -17,7 +17,7 @@ module.exports = function(robot) {
   robot.respond(/deploy (\w+) ([\w-\.]+) (.+)$/i, async (msg) => {
     let environment = msg.match[1].toLowerCase();
     let deployTag = msg.match[2].toLowerCase();
-    let artifactUrl = msg.match[2].toLowerCase();
+    let artifactUrl = msg.match[3].toLowerCase();
     robot.logger.info(
       `attempting to deploy ${environment} by user's command, user=${JSON.stringify(msg.message.user)}`
     );
