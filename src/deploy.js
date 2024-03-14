@@ -11,13 +11,21 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 const deployScriptPath = '/home/hubot/DeploymentScripts/hubot';
-const authorizedSlackUsers = ['bkoh', 'jgachnang', 'blai', 'devops'];
+const authorizedSlackUsers = ['avespoli', 'rchen', 'devops'];
+
+const os = require('os');
+const hostname = os.hostname();
+const hostEnv = hostname.split(/[-.]/)[1];
 
 module.exports = function(robot) {
   robot.respond(/deploy (\w+) ([\w-\.]+) (.+)$/i, async (msg) => {
     let environment = msg.match[1].toLowerCase();
     let deployTag = msg.match[2].toLowerCase();
     let artifactUrl = msg.match[3].toLowerCase();
+
+    if (environment != hostEnv) {
+      return;
+    }
     robot.logger.info(
       `attempting to deploy ${environment} by user's command, user=${JSON.stringify(msg.message.user)}`
     );
