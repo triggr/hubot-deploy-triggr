@@ -23,9 +23,12 @@ module.exports = function(robot) {
     let deployTag = msg.match[2].toLowerCase();
     let artifactUrl = msg.match[3].toLowerCase();
 
+    robot.logger.info(`in ${hostEnv} checking if ${environment}`);
     if (environment != hostEnv) {
+      robot.logger.info(`wrong environment; ignoring`);
       return;
     }
+
     robot.logger.info(
       `attempting to deploy ${environment} by user's command, user=${JSON.stringify(msg.message.user)}`
     );
