@@ -35,7 +35,6 @@ module.exports = function(robot) {
       } else {
         return;
       }
-      return;
     }
     robot.logger.info(
       `attempting to deploy ${environment} by user's command, user=${JSON.stringify(msg.message.user)}`
