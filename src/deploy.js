@@ -11,7 +11,7 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 const deployScriptPath = '/home/hubot/DeploymentScripts/hubot';
-const authorizedSlackUsers = ['avespoli', 'rchen', 'devops'];
+const authorizedSlackUsers = ['avespoli', 'devops', 'jlyons'];
 
 const os = require('os');
 const hostname = os.hostname();
@@ -22,8 +22,12 @@ module.exports = function(robot) {
     let environment = msg.match[1].toLowerCase();
     let deployTag = msg.match[2].toLowerCase();
     let artifactUrl = msg.match[3].toLowerCase();
-
-    if (environment != hostEnv) {
+    
+    // this is a hack because prod doesnt have prd and its expecting 
+    // it to based off this code. I am not dealing with reworking it right now
+    if (environment != hostEnv || (environment === 'prd' && hostEnv === 'sonarmd')) { 
+      console.log('environment mismatch: ', environment);
+      console.log('hostEnv: ', hostEnv);  
       return;
     }
     robot.logger.info(
