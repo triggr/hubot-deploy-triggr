@@ -22,15 +22,19 @@ module.exports = function(robot) {
     let environment = msg.match[1].toLowerCase();
     let deployTag = msg.match[2].toLowerCase();
     let artifactUrl = msg.match[3].toLowerCase();
-
-    robot.logger.error(`environment:  ${environment}`);
-    robot.logger.error(`hostEnv: ${hostEnv}`);  
     
     // this is a hack because prod doesnt have prd and its expecting 
     // it to based off this code. I am not dealing with reworking it right now
-    if (environment != hostEnv || (environment === 'prd' && hostEnv !== 'sonarmd')) { 
+    if (environment != hostEnv) {
       robot.logger.error(`environment mismatch:  ${environment}`);
       robot.logger.error(`hostEnv: ${hostEnv}`);  
+      if(environment === 'prd' && hostEnv === 'sonarmd'){
+        // prod is sonarmd so dont do anything
+        robot.logger.info(`prod is sonarmd so still deploying`);
+
+      } else {
+        return;
+      }
       return;
     }
     robot.logger.info(
