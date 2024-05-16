@@ -25,9 +25,9 @@ module.exports = function(robot) {
     
     // this is a hack because prod doesnt have prd and its expecting 
     // it to based off this code. I am not dealing with reworking it right now
-    if (environment != hostEnv || (environment === 'prd' && hostEnv === 'sonarmd')) { 
-      console.log('environment mismatch: ', environment);
-      console.log('hostEnv: ', hostEnv);  
+    if (environment != hostEnv || (environment === 'prd' && hostEnv !== 'sonarmd')) { 
+      robot.logger.error(`environment mismatch:  ${environment}`);
+      robot.logger.error(`hostEnv: ${hostEnv}`);  
       return;
     }
     robot.logger.info(
